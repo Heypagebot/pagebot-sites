@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skates of Nevin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+* { font-family: 'Inter', sans-serif; }
+h1, h2, h3, .syne { font-family: 'Syne', sans-serif; }
+
+:root {
+  --bg: #0d0d1a;
+  --text: #ffffff;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* NAV */
+#navbar {
+  transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+}
+#navbar.scrolled {
+  background: rgba(13,13,26,0.95) !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 30px rgba(108,99,255,0.15);
+}
+
+/* BLOBS */
+@keyframes blob1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px,-30px) scale(1.08); }
+  66% { transform: translate(-20px,20px) scale(0.95); }
+}
+@keyframes blob2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(-35px,25px) scale(1.05); }
+  66% { transform: translate(20px,-15px) scale(0.97); }
+}
+@keyframes blob3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(20px,30px) scale(0.95); }
+  66% { transform: translate(-30px,-20px) scale(1.06); }
+}
+.blob1 { animation: blob1 9s ease-in-out infinite; }
+.blob2 { animation: blob2 11s ease-in-out infinite; }
+.blob3 { animation: blob3 13s ease-in-out infinite; }
+
+/* PULSE */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.wa-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #25D366;
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* SCROLL INDICATOR */
+@keyframes scrollBounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+/* CARD HOVER */
+.card-hover {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(108,99,255,0.25);
+}
+
+/* MOBILE MENU */
+#mobile-menu {
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+#mobile-menu.open {
+  max-height: 400px;
+  opacity: 1;
+}
+
+/* GRADIENT TEXT */
+.grad-text {
+  background: linear-gradient(135deg, #6c63ff, #ff6584, #6c63ff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* GLOW */
+.glow-btn {
+  box-shadow: 0 0 20px rgba(108,99,255,0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.glow-btn:hover {
+  box-shadow: 0 0 35px rgba(108,99,255,0.7);
+  transform: translateY(-2px);
+}
+
+/* DECORATIVE LETTER */
+.deco-letter {
+  font-family: 'Syne', sans-serif;
+  font-size: 18rem;
+  font-weight: 800;
+  line-height: 1;
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  color: #6c63ff;
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* SECTION TITLE LINE */
+.section-line::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #6c63ff, #ff6584);
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+/* STARS */
+.star { color: #fbbf24; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="syne font-800 text-xl tracking-tight">
+      <span class="grad-text font-extrabold">Skates</span><span class="text-white"> of Nevin</span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+      <a href="#about" class="hover:text-white hover:text-[#6c63ff] transition-colors">About</a>
+      <a href="#courses" class="hover:text-white transition-colors">Courses</a>
+      <a href="#club" class="hover:text-white transition-colors">Club</a>
+      <a href="#location" class="hover:text-white transition-colors">Location</a>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <a href="https://wa.me/847747488?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+      class="hidden md:flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-sm font-semibold px-4 py-2 rounded-full transition-all">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat Now
+    </a>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden text-white focus:outline-none" aria-label="Menu">
+      <svg id="ham-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-[#0d0d1a]/95 backdrop-blur-lg border-t border-white/10">
+    <div class="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-white/80">
+      <a href="#about" class="hover:text-[#6c63ff] transition-colors" onclick="closeMobile()">About</a>
+      <a href="#courses" class="hover:text-[#6c63ff] transition-colors" onclick="closeMobile()">Courses</a>
+      <a href="#club" class="hover:text-[#6c63ff] transition-colors" onclick="closeMobile()">Club</a>
+      <a href="#location" class="hover:text-[#6c63ff] transition-colors" onclick="closeMobile()">Location</a>
+      <a href="https://wa.me/847747488?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+        class="flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full w-fit font-semibold">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  style="background: radial-gradient(ellipse at 60% 40%, #1a1040 0%, #0d0d1a 60%, #000010 100%);">
+
+  <!-- Blobs -->
+  <div class="blob1 absolute top-1/4 left-1/4 w-72 h-72 rounded-full opacity-20"
+    style="background: radial-gradient(circle, #6c63ff, transparent 70%);"></div>
+  <div class="blob2 absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full opacity-20"
+    style="background: radial-gradient(circle, #ff6584, transparent 70%);"></div>
+  <div class="blob3 absolute top-1/2 right-1/3 w-64 h-64 rounded-full opacity-20"
+    style="background: radial-gradient(circle, #4ecdc4, transparent 70%);"></div>
+
+  <!-- Stars BG -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute w-1 h-1 bg-white rounded-full" style="top:10%;left:15%;opacity:0.6;"></div>
+    <div class="absolute w-1 h-1 bg-white rounded-full" style="top:25%;left:80%;opacity:0.5;"></div>
+    <div class="absolute w-1 h-1 bg-white rounded-full" style="top:60%;left:5%;opacity:0.4;"></div>
+    <div class="absolute w-1 h-1 bg-white rounded-full" style="top:75%;left:90%;opacity:0.6;"></div>
+    <div class="absolute w-1 h-1 bg-white rounded-full" style="top:45%;left:50%;opacity:0.3;"></div>
+    <div class="absolute w-2 h-2 bg-[#6c63ff] rounded-full" style="top:20%;left:60%;opacity:0.4;"></div>
+    <div class="absolute w-2 h-2 bg-[#ff6584] rounded-full" style="top:80%;left:30%;opacity:0.3;"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-sm text-white/80 mb-6 backdrop-blur-sm">
+      <span>🛼</span>
+      <span>Kasaragod's Premier Skating Club</span>
+      <span>✨</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="syne font-extrabold leading-none mb-4" style="font-size: clamp(3rem, 9vw, 8rem);">
+      <span class="grad-text">Skates</span><br>
+      <span class="text-white">of Nevin</span>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="text-white/70 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+      Roll into something amazing. Learn to skate, join the community, and glide through life with confidence — for kids & adults alike! 🌟
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+      <a href="https://wa.me/847747488?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+        class="glow-btn bg-[#6c63ff] hover:bg-[#5a52e0] text-white font-semibold px-8 py-4 rounded-full flex items-center gap-3 text-base">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Join the Club
+      </a>
+      <a href="#courses"
+        class="border border-white/30 hover:border-[#6c63ff] text-white font-semibold px-8 py-4 rounded-full transition-all hover:bg-white/5 text-base">
+        Explore Courses ↓
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
+      <div class="text-center">
+        <div class="syne font-bold text-3xl text-[#6c63ff]">Kids</div>
+        <div class="text-white/50 text-sm mt-1">Friendly Training</div>
+      </div>
+      <div class="w-px h-10 bg-white/20 hidden sm:block"></div>
+      <div class="text-center">
+        <div class="syne font-bold text-3xl text-[#ff6584]">Adults</div>
+        <div class="text-white/50 text-sm mt-1">Welcome Too</div>
+      </div>
+      <div class="w-px h-10 bg-white/20 hidden sm:block"></div>
+      <div class="text-center">
+        <div class="syne font-bold text-3xl text-[#4ecdc4]">Kasaragod</div>
+        <div class="text-white/50 text-sm mt-1">Based Club</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-bounce absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+    <span class="text-xs tracking-widest uppercase">Scroll</span>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="py-24 px-6 relative overflow-hidden"
+  style="background: linear-gradient(180deg, #0d0d1a 0%, #100d22 100%);">
+
+  <div class="deco-letter select-none">S</div>
+
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+
+    <!-- Left Visual -->
+    <div class="relative">
+      <div class="relative rounded-3xl overflow-hidden"
+        style="background: linear-gradient(135deg, #1a1040, #0d1a30); border: 1px solid rgba(108,99,255,0.2); padding: 3rem;">
+        <!-- Skate Visual -->
+        <div class="text-center">
+          <div class="text-9xl mb-6">🛼</div>
+          <div class="syne font-bold text-4xl grad-text mb-2">Nevin</div>
+          <div class="text-white/60 text-base mb-6">Age 13 · Kasaragod</div>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="bg-[#6c63ff]/20 border border-[#6c63ff]/30 text-[#6c63ff] px-3 py-1 rounded-full text-xs font-medium">🛼 Skater</span>
+            <span class="bg-[#ff6584]/20 border border-[#ff6584]/30 text-[#ff6584] px-3 py-1 rounded-full text-xs font-medium">🎓 Coach</span>
+            <span class="bg-[#4ecdc4]/20 border border-[#4ecdc4]/30 text-[#4ecdc4] px-3 py-1 rounded-full text-xs font-medium">🌟 Club Founder</span>
+          </div>
+        </div>
+
+        <!-- Glowing border effect -->
+        <div class="absolute inset-0 rounded-3xl pointer-events-none"
+          style="box-shadow: inset 0 0 40px rgba(108,99,255,0.08);"></div>
+      </div>
+
+      <!-- Floating badge -->
+      <div class="absolute -bottom-4 -right-4 bg-[#6c63ff] text-white rounded-2xl px-4 py-3 text-sm font-semibold shadow-xl">
+        ✨ Passionate Coach
+      </div>
+    </div>
+
+    <!-- Right Story -->
+    <div>
+      <div class="text-[#6c63ff] text-sm font-semibold uppercase tracking-widest mb-3">Our Story</div>
+      <h2 class="syne font-bold text-4xl md:text-5xl text-white mb-6 section-line leading-tight">
+        Born to Skate,<br>Built to Inspire
+      </h2>
+      <div class="space-y-4 text-white/70 leading-relaxed text-base">
+        <p>
+          Hi, I'm <span class="text-white font-semibold">Nevin</span> — a 13-year-old skater from <span class="text-[#6c63ff] font-semibold">Kasaragod</span> with a big dream: to build a skating community where everyone belongs. 🛼
+        </p>
+        <p>
+          Skating isn't just my hobby — it's my passion and purpose. I started young, fell a few times (literally!), but kept rolling because nothing beats the feeling of gliding freely with the wind in your face.
+        </p>
+        <p>
+          Now I'm on a mission to <span class="text-white font-semibold">teach skating to children and adults</span>, build confidence, and create a vibrant skating club for all enthusiasts in Kasaragod. Whether you're 5 or 50 — this club is for you! 💪
+        </p>
+      </div>
+
+      <!-- Values -->
+      <div class="grid grid-cols-2 gap-4 mt-8">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <div class="text-2xl mb-2">❤️</div>
+          <div class="text-white font-semibold text-sm">Passion First</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <div class="text-2xl mb-2">🎯</div>
+          <div class="text-white font-semibold text-sm">Expert Guidance</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <div class="text-2xl mb-2">👨‍👩‍👧‍👦</div>
+          <div class="text-white font-semibold text-sm">All Ages Welcome</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <div class="text-2xl mb-2">🌟</div>
+          <div class="text-white font-semibold text-sm">Community Spirit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COURSES ===== -->
+<section id="courses" class="py-24 px-6 relative overflow-hidden"
+  style="background: linear-gradient(180deg, #100d22 0%, #0a0a1a 100%);">
+
+  <!-- BG decoration -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#6c63ff]/40 to-transparent"></div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-[#6c63ff] text-sm font-semibold uppercase tracking-widest mb-3">What We Offer</div>
+      <h2 class="syne font-bold text-4xl md:text-5xl text-white mb-4">Skating Courses</h2>
+      <p class="text-white/60 max-w-xl mx-auto text-base">
+        Beginner-friendly sessions designed to build your skills, confidence, and love for skating. 🛼✨
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+      <!-- Kids Course -->
+      <div class="card-hover rounded-3xl p-8 relative overflow-hidden cursor-pointer"
+        style="background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(108,99,255,0.2);">
+        <!-- Top accent -->
+        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl"
+          style="background: linear-gradient(90deg, #6c63ff, #ff6584);"></div>
+
+        <div class="text-5xl mb-5">👧🛼</div>
+        <div class="text-[#6c63ff] text-xs font-semibold uppercase tracking-widest mb-2">Children's Course</div>
+        <h3 class="syne font-bold text-2xl text-white mb-3">Kids Skating Program</h3>
+        <p class="text-white/60 text-sm leading-relaxed mb-6">
+          A fun, safe, and encouraging skating course designed especially for children. Learn the basics, build balance, and discover the joy of skating
