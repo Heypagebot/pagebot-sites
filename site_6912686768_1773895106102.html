@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Puttu Project</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg: #1a0a00;
+  --text: #f5e6d0;
+  --accent: #d47c3a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: #1a0a00;
+  color: #f5e6d0;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.display-font { font-family: 'Cormorant Garamond', serif; }
+
+/* Nav */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  transition: all 0.4s ease;
+}
+#navbar.scrolled {
+  background: rgba(26, 10, 0, 0.92);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  padding: 0.8rem 2rem;
+}
+
+/* Blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.blob1 {
+  width: clamp(300px, 50vw, 600px);
+  height: clamp(300px, 50vw, 600px);
+  background: radial-gradient(circle, #d47c3a, #8b3a0a);
+  top: -10%;
+  left: -10%;
+  animation: float1 18s infinite alternate ease-in-out;
+}
+.blob2 {
+  width: clamp(250px, 40vw, 500px);
+  height: clamp(250px, 40vw, 500px);
+  background: radial-gradient(circle, #8b2252, #d47c3a);
+  top: 20%;
+  right: -10%;
+  animation: float2 22s infinite alternate ease-in-out;
+}
+.blob3 {
+  width: clamp(200px, 35vw, 450px);
+  height: clamp(200px, 35vw, 450px);
+  background: radial-gradient(circle, #5c2a00, #d47c3a);
+  bottom: 5%;
+  left: 30%;
+  animation: float3 26s infinite alternate ease-in-out;
+}
+
+@keyframes float1 {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  100% { transform: translateY(60px) rotate(25deg) scale(1.1); }
+}
+@keyframes float2 {
+  0% { transform: translateY(0px) rotate(0deg) scale(1.05); }
+  100% { transform: translateY(-70px) rotate(-20deg) scale(0.95); }
+}
+@keyframes float3 {
+  0% { transform: translateY(0px) rotate(0deg) scale(0.95); }
+  100% { transform: translateY(50px) rotate(30deg) scale(1.08); }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  animation: bounceDown 2s infinite ease-in-out;
+}
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: 0.4; }
+}
+
+/* WhatsApp pulse */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.wa-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  animation: pulse-ring 2s infinite ease-out;
+}
+
+/* Glass cards */
+.glass-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  transition: all 0.35s ease;
+}
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(212, 124, 58, 0.25);
+  border-color: rgba(212, 124, 58, 0.3);
+}
+
+/* Animate elements */
+.animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-delay-1 { transition-delay: 0.15s; }
+.animate-delay-2 { transition-delay: 0.3s; }
+.animate-delay-3 { transition-delay: 0.45s; }
+.animate-delay-4 { transition-delay: 0.6s; }
+
+/* Mobile menu */
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+#mobile-menu.open {
+  max-height: 300px;
+}
+
+/* Decorative letter */
+.deco-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(8rem, 22vw, 20rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 2px #f5e6d0;
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Sulaimani badge */
+.sulaimani-badge {
+  background: linear-gradient(135deg, rgba(212,124,58,0.2), rgba(212,124,58,0.05));
+  border: 1px solid rgba(212,124,58,0.4);
+  border-radius: 999px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== FIXED WHATSAPP BUTTON ===== -->
+<a href="https://wa.me/918547500686?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank" rel="noopener"
+   class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl wa-pulse"
+   style="background:#25D366;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7 relative z-10">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="display-font text-xl md:text-2xl font-bold tracking-wide" style="color:#d47c3a;">
+      The Puttu Project
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about" class="text-sm tracking-widest uppercase hover:text-amber-400 transition-colors duration-300" style="color:#f5e6d0;">About</a>
+      <a href="#menu" class="text-sm tracking-widest uppercase hover:text-amber-400 transition-colors duration-300" style="color:#f5e6d0;">Menu</a>
+      <a href="#location" class="text-sm tracking-widest uppercase hover:text-amber-400 transition-colors duration-300" style="color:#f5e6d0;">Visit</a>
+      <a href="https://wa.me/918547500686?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-lg"
+         style="background:#d47c3a; color:#1a0a00;">
+        Order on WhatsApp
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+      <span class="block w-6 h-0.5 rounded transition-all duration-300" style="background:#f5e6d0;"></span>
+      <span class="block w-6 h-0.5 rounded transition-all duration-300" style="background:#f5e6d0;"></span>
+      <span class="block w-4 h-0.5 rounded transition-all duration-300" style="background:#f5e6d0;"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden">
+    <div class="flex flex-col gap-4 px-2 pt-4 pb-6 border-t mt-3" style="border-color:rgba(212,124,58,0.2);">
+      <a href="#about" class="text-sm tracking-widest uppercase py-2" style="color:#f5e6d0;">About</a>
+      <a href="#menu" class="text-sm tracking-widest uppercase py-2" style="color:#f5e6d0;">Menu</a>
+      <a href="#location" class="text-sm tracking-widest uppercase py-2" style="color:#f5e6d0;">Visit</a>
+      <a href="https://wa.me/918547500686?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="px-5 py-3 rounded-full text-sm font-semibold text-center mt-2"
+         style="background:#d47c3a; color:#1a0a00;">
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="relative w-full overflow-hidden flex flex-col items-center justify-center" style="min-height:100vh; background:#1a0a00;">
+
+  <!-- Mesh gradient background -->
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 20% 30%, rgba(212,124,58,0.18) 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(139,34,82,0.12) 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(92,42,0,0.3) 0%, transparent 70%);"></div>
+
+  <!-- Blobs -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto">
+
+    <div class="sulaimani-badge px-5 py-2 mb-6 animate">
+      <span class="text-xs tracking-[0.3em] uppercase font-medium" style="color:#d47c3a;">Kasaragod's Finest Fusion</span>
+    </div>
+
+    <h1 class="display-font animate animate-delay-1" style="font-size:clamp(3.5rem,10vw,9rem); line-height:0.95; font-weight:700; color:#f5e6d0; letter-spacing:-0.02em;">
+      The Puttu<br>
+      <em style="color:#d47c3a; font-style:italic;">Project</em>
+    </h1>
+
+    <p class="mt-6 max-w-md mx-auto text-base md:text-lg font-light leading-relaxed animate animate-delay-2" style="color:rgba(245,230,208,0.7);">
+      Reimagining Kerala's beloved puttu with bold fusions & unlimited sulaimani — one bowl at a time.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-10 animate animate-delay-3">
+      <a href="https://wa.me/918547500686?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="px-8 py-4 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center gap-2 justify-center"
+         style="background:#d47c3a; color:#1a0a00; min-height:44px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order Now
+      </a>
+      <a href="#menu"
+         class="px-8 py-4 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-105 border flex items-center justify-center"
+         style="border-color:rgba(212,124,58,0.5); color:#f5e6d0; min-height:44px;">
+        View Menu
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-indicator flex flex-col items-center gap-2">
+    <span class="text-xs tracking-widest uppercase" style="color:rgba(245,230,208,0.4);">Scroll</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:rgba(212,124,58,0.6);">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="relative py-24 md:py-36 overflow-hidden" style="background:#1a0a00;">
+
+  <!-- Subtle line -->
+  <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(to right, transparent, rgba(212,124,58,0.4), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Decorative letter -->
+      <div class="relative flex items-center justify-center" style="min-height: 320px;">
+        <div class="deco-letter">T</div>
+        <!-- Stats cards -->
+        <div class="relative z-10 flex flex-col gap-5 w-full max-w-xs mx-auto">
+          <div class="glass-card p-5 animate">
+            <div class="text-3xl mb-1">🍵</div>
+            <div class="display-font text-lg font-semibold" style="color:#d47c3a;">Unlimited Sulaimani</div>
+            <div class="text-sm mt-1" style="color:rgba(245,230,208,0.6);">Complimentary with every order</div>
+          </div>
+          <div class="glass-card p-5 animate animate-delay-1">
+            <div class="text-3xl mb-1">🌟</div>
+            <div class="display-font text-lg font-semibold" style="color:#d47c3a;">Fusion Creations</div>
+            <div class="text-sm mt-1" style="color:rgba(245,230,208,0.6);">Bold flavours, Kerala roots</div>
+          </div>
+          <div class="glass-card p-5 animate animate-delay-2">
+            <div class="text-3xl mb-1">🕘</div>
+            <div class="display-font text-lg font-semibold" style="color:#d47c3a;">9 AM — 9 PM</div>
+            <div class="text-sm mt-1" style="color:rgba(245,230,208,0.6);">Open every day, Kasaragod</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="flex flex-col gap-6">
+        <p class="text-xs tracking-[0.3em] uppercase animate" style="color:#d47c3a;">Our Story</p>
+        <h2 class="display-font font-bold leading-tight animate animate-delay-1" style="font-size:clamp(2.5rem,5vw,4.5rem); color:#f5e6d0;">
+          Puttu, <em style="color:#d47c3a; font-style:italic;">reimagined</em> for the bold.
+        </h2>
+        <p class="text-base leading-relaxed animate animate-delay-2" style="color:rgba(245,230,208,0.7);">
+          The Puttu Project was born from a love for Kerala's humble steam-cooked classic and a hunger to push boundaries. We take the beloved puttu and transform it with rich, unexpected fillings — from succulent beef to silky butter chicken, smoky paneer to indulgent chocolate.
+        </p>
+        <p class="text-base leading-relaxed animate animate-delay-3" style="color:rgba(245,230,208,0.7);">
+          Every visit comes with our signature unlimited sulaimani — the perfect sip to complement every flavourful bite.
+        </p>
+
+        <!-- Highlights -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+          <div class="flex flex-col gap-1 animate animate-delay-1">
+            <div class="text-2xl">🫙</div>
+            <div class="text-sm font-semibold" style="color:#f5e6d0;">Fresh Daily</div>
+            <div class="text-xs" style="color:rgba(245,230,208,0.5);">Made to order, always fresh</div>
+          </div>
+          <div class="flex flex-col gap-1 animate animate-delay-2">
+            <div class="text-2xl">🔥</div>
+            <div class="text-sm font-semibold" style="color:#f5e6d0;">Bold Fusions</div>
+            <div class="text-xs" style="color:rgba(245,230,208,0.5);">Unique flavour combos</div>
+          </div>
+          <div class="flex flex-col gap-1 animate animate-delay-3">
+            <div class="text-2xl">☕</div>
+            <div class="text-sm font-semibold" style="color:#f5e6d0;">Free Sulaimani</div>
+            <div class="text-xs" style="color:rgba(245,230,208,0.5);">Unlimited, every time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu" class="py-24 md:py-36 relative" style="background: linear-gradient(180deg, #1a0a00 0%, #260d00 50%, #1a0a00 100%);">
+
+  <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(to right, transparent, rgba(212,124,58,0.3), transparent);"></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+
+    <div class="text-center mb-16">
+      <p class="text-xs tracking-[0.3em] uppercase mb-3 animate" style="color:#d47c3a;">What We Serve</p>
+      <h2 class="display-font font-bold animate animate-delay-1" style="font-size:clamp(2.5rem,6vw,5rem); color:#f5e6d0;">
+        Our Signature <em style="color:#d47c3a; font-style:italic;">Puttu</em>
+      </h2>
+      <p class="mt-4 max-w-md mx-auto text-sm animate animate-delay-2" style="color:rgba(245,230,208,0.6);">
+        Each puttu is crafted with premium ingredients and served steaming hot.
+      </p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-auto">
+
+      <!-- Card 1: Featured — col-span-2 -->
+      <div class="glass-card p-8 md:col-span-2 lg:col-span-2 flex flex-col md:flex-row gap-8 items-center animate">
+        <div class="text-8xl md:text-9xl flex-shrink-0 drop-shadow-xl">🧀</div>
+        <div class="flex flex-col gap-3 text-center md:text-left">
+          <span class="text-xs tracking-[0.25em] uppercase px-3 py-1 rounded-full self-center md:self-start" style="background:rgba(212,124,58,0.15); color:#d47c3a; border:1px solid rgba(212,124,58,0.3);">Chef's Special</span>
+          <h3 class="display-font font-bold" style="font-size:clamp(2rem,4vw,3rem); color:#f5e6d0;">Cheese Puttu</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(245,230,208,0.65);">Soft steamed puttu layered with rich, melted cheese — a creamy, indulgent twist on a Kerala classic. Gooey, golden and utterly satisfying.</p>
+          <div class="mt-2 text-xs tracking-widest uppercase font-medium" style="color:#d47c3a;">Ask for price ↗</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass-card p-7 flex flex-col gap-4 items-center text-center animate animate-delay-1">
+        <div class="text-7xl drop-shadow-xl">🍗</div>
+        <h3 class="display-font font-bold text-3xl" style="color:#f5e6d0;">Butter Chicken Puttu</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(245,230,208,0.65);">Tender butter chicken packed into fluffy puttu layers — smoky, creamy and packed with flavour.</p>
+        <div class="mt-auto pt-2 text-xs tracking-widest uppercase font-medium" style="color:#d47c3a;">Ask for price ↗</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass-card p-7 flex flex-col gap-4 items-center text-center animate animate-delay-2">
+        <div class="text-7xl drop-shadow-xl">🥩</div>
+        <h3 class="display-font font-bold text-3xl" style="color:#f5e6d0;">Beef Puttu</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(245,230,208,0.65);">Spice-infused slow-cooked beef nestled between steamed puttu layers. Hearty, bold and deeply satisfying.</p>
+        <div class="mt-auto pt-2 text-xs tracking-widest uppercase font-medium" style="color:#d47c3a;">Ask for price ↗</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="glass-card p-7 flex flex-col gap-4 items-center text-center animate animate-delay-3">
+        <div class="text-7xl drop-shadow-xl">🧆</div>
+        <h3 class="display-font font-bold text-3xl" style="color:#f5e6d0;">Paneer Puttu</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(245,230,208,0.65);">Spiced cottage cheese with aromatic masalas — a vegetarian delight that punches way above its weight.</p>
+        <div class="mt-auto pt-2 text-xs tracking-widest uppercase font-medium" style="color:#d47c3a;">Ask for price ↗</div>
+      </div>
+
+      <!-- Card 5: Sulaimani highlight -->
