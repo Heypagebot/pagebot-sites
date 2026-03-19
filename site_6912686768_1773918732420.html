@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Fresh Supermarket</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0a1f0a;
+  color: #e8f5e8;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a1f0a; }
+::-webkit-scrollbar-thumb { background: #2d7a2d; border-radius: 10px; }
+
+.nav-solid {
+  background: rgba(10, 31, 10, 0.95) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 30px rgba(45, 122, 45, 0.15);
+}
+
+@keyframes floatBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+@keyframes floatBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-35px, 30px) scale(1.08); }
+  66% { transform: translate(25px, -25px) scale(0.92); }
+}
+@keyframes floatBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, 35px) scale(0.96); }
+  66% { transform: translate(-30px, -15px) scale(1.06); }
+}
+
+.blob1 { animation: floatBlob1 12s ease-in-out infinite; }
+.blob2 { animation: floatBlob2 15s ease-in-out infinite; }
+.blob3 { animation: floatBlob3 10s ease-in-out infinite; }
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+}
+.wa-pulse { animation: pulse-wa 2s infinite; }
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up-1 { animation: fadeUp 0.8s ease forwards; }
+.fade-up-2 { animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+.fade-up-3 { animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0; }
+.fade-up-4 { animation: fadeUp 0.8s ease 0.6s forwards; opacity: 0; }
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(45, 122, 45, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #4caf50, #81c784, #4caf50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.branch-card {
+  transition: all 0.3s ease;
+}
+.branch-card:hover {
+  border-color: rgba(76, 175, 80, 0.6) !important;
+  transform: translateY(-4px);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 31, 10, 0.98);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+
+.logo-upload-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-upload-label input[type="file"] {
+  display: none;
+}
+#logoPreview {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+}
+#logoDefault {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #2d7a2d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <label class="logo-upload-label" title="Click to upload your logo">
+        <input type="file" accept="image/*" onchange="handleLogoUpload(event)">
+        <img id="logoPreview" src="" alt="Logo">
+        <div id="logoDefault">D</div>
+      </label>
+      <span class="text-xl font-semibold" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">Day Fresh</span>
+    </div>
+    <!-- Links Desktop -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#hero" class="text-sm transition-colors" style="color: rgba(200,230,200,0.8);" onmouseover="this.style.color='#4caf50'" onmouseout="this.style.color='rgba(200,230,200,0.8)'">Home</a>
+      <a href="#about" class="text-sm transition-colors" style="color: rgba(200,230,200,0.8);" onmouseover="this.style.color='#4caf50'" onmouseout="this.style.color='rgba(200,230,200,0.8)'">About</a>
+      <a href="#offerings" class="text-sm transition-colors" style="color: rgba(200,230,200,0.8);" onmouseover="this.style.color='#4caf50'" onmouseout="this.style.color='rgba(200,230,200,0.8)'">What We Offer</a>
+      <a href="#location" class="text-sm transition-colors" style="color: rgba(200,230,200,0.8);" onmouseover="this.style.color='#4caf50'" onmouseout="this.style.color='rgba(200,230,200,0.8)'">Branches</a>
+      <a href="#contact" class="text-sm transition-colors" style="color: rgba(200,230,200,0.8);" onmouseover="this.style.color='#4caf50'" onmouseout="this.style.color='rgba(200,230,200,0.8)'">Contact</a>
+    </div>
+    <!-- WhatsApp Desktop -->
+    <a href="https://wa.me/918574774848?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+      class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105"
+      style="background: #25D366; color: white;">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      WhatsApp Us
+    </a>
+    <!-- Hamburger -->
+    <button onclick="toggleMenu()" class="md:hidden focus:outline-none z-50 relative" style="color: #e8f5e8;">
+      <svg id="ham-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+  <button onclick="toggleMenu()" class="absolute top-6 right-6" style="color: #e8f5e8;">
+    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <a href="#hero" onclick="toggleMenu()" class="text-2xl font-medium" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">Home</a>
+  <a href="#about" onclick="toggleMenu()" class="text-2xl font-medium" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">About</a>
+  <a href="#offerings" onclick="toggleMenu()" class="text-2xl font-medium" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">What We Offer</a>
+  <a href="#location" onclick="toggleMenu()" class="text-2xl font-medium" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">Branches</a>
+  <a href="#contact" onclick="toggleMenu()" class="text-2xl font-medium" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">Contact</a>
+  <a href="https://wa.me/918574774848?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+    class="flex items-center gap-2 px-6 py-3 rounded-full font-medium mt-4"
+    style="background: #25D366; color: white;">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    WhatsApp Us
+  </a>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 30% 50%, #0d3b0d 0%, #0a1f0a 50%, #061206 100%);"></div>
+
+  <div class="blob1 absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 rounded-full" style="background: radial-gradient(circle, #4caf50, #2d7a2d); opacity: 0.15; filter: blur(60px);"></div>
+  <div class="blob2 absolute bottom-1/4 right-1/4 w-72 h-72 md:w-[28rem] md:h-[28rem] rounded-full" style="background: radial-gradient(circle, #81c784, #4caf50); opacity: 0.12; filter: blur(80px);"></div>
+  <div class="blob3 absolute top-1/2 right-1/3 w-48 h-48 md:w-72 md:h-72 rounded-full" style="background: radial-gradient(circle, #a5d6a7, #4caf50); opacity: 0.1; filter: blur(50px);"></div>
+
+  <div class="absolute inset-0" style="background-image: linear-gradient(rgba(76,175,80,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(76,175,80,0.04) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <div class="fade-up-1 mb-4">
+      <span class="inline-block px-4 py-1 rounded-full text-xs font-medium tracking-widest uppercase border mb-6"
+        style="border-color: rgba(76,175,80,0.4); color: #4caf50; background: rgba(76,175,80,0.08);">
+        3 Branches in Kasaragod
+      </span>
+    </div>
+    <h1 class="fade-up-2 font-bold leading-none mb-6" style="font-size: clamp(3rem, 9vw, 8rem); font-family: 'Cormorant Garamond', serif; color: #e8f5e8; text-shadow: 0 4px 40px rgba(76,175,80,0.3);">
+      Day <span class="text-gradient">Fresh</span><br>Supermarket
+    </h1>
+    <p class="fade-up-3 text-lg md:text-xl mb-10 max-w-xl mx-auto" style="color: #a5c8a5; line-height: 1.7;">
+      Freshness you can taste. Prices you'll love. Open from dawn to night — because Kasaragod deserves better, every single day.
+    </p>
+    <div class="fade-up-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://wa.me/918574774848?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+        class="flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+        style="background: linear-gradient(135deg, #2d7a2d, #4caf50); box-shadow: 0 8px 30px rgba(76,175,80,0.4);">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Chat With Us
+      </a>
+      <a href="#offerings"
+        class="flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105"
+        style="border: 1.5px solid rgba(76,175,80,0.5); color: #4caf50; background: rgba(76,175,80,0.06);">
+        Explore Our Store
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-bounce absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+    <span class="text-xs tracking-widest" style="color: rgba(76,175,80,0.6);">SCROLL</span>
+    <svg class="w-5 h-5" style="color: #4caf50;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="py-10 px-6 md:px-12 relative" style="background: rgba(76,175,80,0.08); border-top: 1px solid rgba(76,175,80,0.15); border-bottom: 1px solid rgba(76,175,80,0.15);">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <div class="text-4xl font-bold text-gradient" style="font-family: 'Cormorant Garamond', serif;">3</div>
+      <div class="text-sm mt-1" style="color: #a5c8a5;">Branches in Kasaragod</div>
+    </div>
+    <div>
+      <div class="text-4xl font-bold text-gradient" style="font-family: 'Cormorant Garamond', serif;">1000+</div>
+      <div class="text-sm mt-1" style="color: #a5c8a5;">Products Available</div>
+    </div>
+    <div>
+      <div class="text-4xl font-bold text-gradient" style="font-family: 'Cormorant Garamond', serif;">8AM</div>
+      <div class="text-sm mt-1" style="color: #a5c8a5;">Opens Every Morning</div>
+    </div>
+    <div>
+      <div class="text-4xl font-bold text-gradient" style="font-family: 'Cormorant Garamond', serif;">11PM</div>
+      <div class="text-sm mt-1" style="color: #a5c8a5;">Closes Every Night</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-6 md:px-12 relative overflow-hidden">
+  <div class="absolute inset-0" style="background: linear-gradient(180deg, #0a1f0a 0%, #0d2e0d 50%, #0a1f0a 100%);"></div>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- Left Decorative -->
+      <div class="relative flex items-center justify-center">
+        <div class="absolute" style="font-size: 18rem; font-family: 'Cormorant Garamond', serif; color: rgba(76,175,80,0.04); line-height: 1; user-select: none; font-weight: 700;">D</div>
+        <div class="relative z-10 text-center">
+          <div class="w-64 h-64 md:w-80 md:h-80 rounded-3xl mx-auto flex flex-col items-center justify-center gap-6 p-8"
+            style="background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(76,175,80,0.04)); border: 1px solid rgba(76,175,80,0.2);">
+            <div class="text-6xl">🛒</div>
+            <div class="text-center">
+              <div class="text-5xl font-bold text-gradient" style="font-family: 'Cormorant Garamond', serif;">3</div>
+              <div class="text-sm mt-1" style="color: #a5c8a5;">Branches Across Kasaragod</div>
+            </div>
+            <div class="w-full h-px" style="background: rgba(76,175,80,0.2);"></div>
+            <div class="text-center">
+              <div class="text-2xl font-semibold" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">8AM – 11PM</div>
+              <div class="text-xs mt-1" style="color: #a5c8a5;">Open Every Day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div>
+        <span class="inline-block text-xs tracking-widest uppercase mb-4 font-medium" style="color: #4caf50;">Our Story</span>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight" style="font-family: 'Cormorant Garamond', serif; color: #e8f5e8;">
+          More Than Just a <span class="text-gradient">Supermarket</span>
+        </h2>
+        <p class="mb-5 leading-relaxed" style="color: #a5c8a5;">
+          Day Fresh Supermarket was born from a simple belief — every family deserves access to the freshest produce, quality groceries, and everything they need for home, all under one roof.
+        </p>
+        <p class="mb-5 leading-relaxed" style="color: #a5c8a5;">
+          With three convenient branches in Vidyanagar, Cherkala, and Uliyathadka, we've grown close to the hearts of Kasaragod's communities. Our shelves are stocked with care, and our doors are open from early morning to late night — because we know life doesn't always wait.
+        </p>
+        <p class="mb-8 leading-relaxed" style="color: #a5c8a5;">
+          From fresh vegetables picked daily, to warm bakery items, to every household essential you need — Day Fresh is your home away from home.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <div class="flex items-center gap-3 p-4 rounded-xl" style="background: rgba(76,175,80,0.
