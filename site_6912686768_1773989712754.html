@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D Café — Cozy Coffee & Homemade Treats | Bangalore</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #FDF6EC;
+  --brown: #5C3D2E;
+  --caramel: #C8860A;
+  --mocha: #8B5E3C;
+  --warm: #F0DFC8;
+  --dark: #2C1A0E;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-dancing { font-family: 'Dancing Script', cursive; }
+
+/* NAV */
+#navbar {
+  transition: all 0.4s ease;
+  background: transparent;
+}
+#navbar.scrolled {
+  background: rgba(44, 26, 14, 0.97);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+#navbar.scrolled .nav-link { color: #FDF6EC; }
+#navbar.scrolled .nav-link:hover { color: var(--caramel); }
+
+.nav-link {
+  color: #FDF6EC;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--caramel);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* HERO */
+.hero-section {
+  background: linear-gradient(135deg, #2C1A0E 0%, #5C3D2E 40%, #8B5E3C 70%, #C8860A 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.blob1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50% 30% 70% 40%;
+  background: rgba(200,134,10,0.2);
+  top: -100px;
+  right: -100px;
+  animation: floatBlob 8s ease-in-out infinite;
+}
+.blob2 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 70% 30% 50% 60%;
+  background: rgba(253,246,236,0.08);
+  bottom: -80px;
+  left: -80px;
+  animation: floatBlob 10s ease-in-out infinite reverse;
+}
+.blob3 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 40% 70% 30% 60%;
+  background: rgba(139,94,60,0.25);
+  top: 30%;
+  left: 20%;
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 20px) scale(0.95); }
+}
+
+.hero-headline {
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  color: #FDF6EC;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.scroll-indicator {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+/* WHATSAPP */
+.whatsapp-btn {
+  animation: waPulse 2.5s infinite;
+}
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+  50% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+}
+
+/* MENU CARDS */
+.menu-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(92,61,46,0.1);
+}
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(92,61,46,0.25);
+}
+
+.menu-img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+/* ABOUT */
+.about-highlight {
+  background: linear-gradient(135deg, var(--warm), #fff);
+  border-left: 4px solid var(--caramel);
+  border-radius: 0 12px 12px 0;
+}
+
+/* TESTIMONIALS */
+.testimonial-card {
+  background: white;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(92,61,46,0.1);
+  transition: transform 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+.quote-mark {
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--caramel);
+  opacity: 0.3;
+  font-family: 'Playfair Display', serif;
+}
+
+/* FAQ */
+.faq-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(92,61,46,0.08);
+}
+.faq-question {
+  cursor: pointer;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: var(--brown);
+  transition: background 0.3s;
+}
+.faq-question:hover { background: var(--warm); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 24px;
+  color: #6b7280;
+  line-height: 1.7;
+}
+.faq-answer.open {
+  max-height: 200px;
+  padding: 0 24px 20px;
+}
+.faq-icon {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+  color: var(--caramel);
+}
+.faq-icon.rotated { transform: rotate(45deg); }
+
+/* LOCATION */
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--warm);
+}
+
+/* GALLERY */
+.gallery-item {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.gallery-item:hover { transform: scale(1.02); }
+
+/* CONTACT FORM */
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background: white;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--caramel);
+}
+
+/* MOBILE MENU */
+#mobile-menu {
+  display: none;
+}
+#mobile-menu.open {
+  display: block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--caramel), #E09B1A);
+  color: white;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 50px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(200,134,10,0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(200,134,10,0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #FDF6EC;
+  font-weight: 700;
+  padding: 13px 32px;
+  border-radius: 50px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  border: 2px solid rgba(253,246,236,0.6);
+}
+.btn-secondary:hover {
+  background: rgba(253,246,236,0.15);
+  border-color: #FDF6EC;
+  transform: translateY(-3px);
+}
+
+section { scroll-margin-top: 80px; }
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/856488484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+   class="whatsapp-btn fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full flex items-center justify-center" style="background:#25D366;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="30" height="30">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1773989102091.jpg"
+           alt="D Café Logo" class="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-lg">
+      <span class="font-dancing text-2xl text-amber-300 font-bold">D Café</span>
+    </div>
+
+    <!-- Center Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#testimonials" class="nav-link">Reviews</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#location" class="nav-link">Visit Us</a>
+    </div>
+
+    <!-- WhatsApp Nav -->
+    <div class="hidden md:flex items-center gap-4">
+      <a href="https://wa.me/856488484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="flex items-center gap-2 text-white font-semibold text-sm px-4 py-2 rounded-full transition-all hover:scale-105"
+         style="background:#25D366;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18" height="18">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order Now
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden text-white focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path id="ham-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden" style="background:rgba(44,26,14,0.98); border-top:1px solid rgba(200,134,10,0.3);">
+    <div class="flex flex-col px-6 py-4 gap-4">
+      <a href="#about" class="nav-link text-amber-100">About</a>
+      <a href="#menu" class="nav-link text-amber-100">Menu</a>
+      <a href="#gallery" class="nav-link text-amber-100">Gallery</a>
+      <a href="#testimonials" class="nav-link text-amber-100">Reviews</a>
+      <a href="#faq" class="nav-link text-amber-100">FAQ</a>
+      <a href="#location" class="nav-link text-amber-100">Visit Us</a>
+      <a href="https://wa.me/856488484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="flex items-center gap-2 text-white font-semibold text-sm px-4 py-2 rounded-full w-fit"
+         style="background:#25D366;">
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section min-h-screen flex items-center justify-center relative" id="home">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="blob3"></div>
+
+  <!-- Decorative SVG -->
+  <svg class="absolute top-0 right-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" style="opacity:0.06;" preserveAspectRatio="none">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.5" fill="#FDF6EC"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dots)"/>
+  </svg>
+
+  <svg class="absolute bottom-0 left-0" width="400" height="300" style="opacity:0.18;" viewBox="0 0 400 300">
+    <ellipse cx="100" cy="250" rx="200" ry="120" fill="#C8860A"/>
+  </svg>
+
+  <svg class="absolute top-20 right-20" width="200" height="200" style="opacity:0.15;" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#FDF6EC" stroke-width="2"/>
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#FDF6EC" stroke-width="1"/>
+    <circle cx="100" cy="100" r="40" fill="none" stroke="#FDF6EC" stroke-width="1"/>
+  </svg>
+
+  <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+    <div class="flex justify-center mb-8">
+      <div class="relative">
+        <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1773989102091.jpg"
+             alt="D Café" class="w-28 h-28 rounded-full object-cover border-4 shadow-2xl"
+             style="border-color: #C8860A; box-shadow: 0 0 0 8px rgba(200,134,10,0.2), 0 20px 60px rgba(0,0,0,0.5);">
+        <div class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm"
+             style="background:#C8860A;">✨</div>
+      </div>
+    </div>
+
+    <p class="font-dancing text-amber-300 text-2xl mb-4 tracking-wide">Welcome to</p>
+    <h1 class="hero-headline mb-6">
+      D <span style="color:#C8860A;">Café</span>
+    </h1>
+    <p class="text-amber-100 text-xl md:text-2xl mb-4 font-light max-w-2xl mx-auto leading-relaxed">
+      Bangalore's Coziest Corner for Coffee, Homemade Cakes & Sweet Indulgence
+    </p>
+    <p class="text-amber-200 text-base mb-10 max-w-xl mx-auto" style="opacity:0.85;">
+      Every sip, every bite — crafted with love from our kitchen to your heart.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#menu" class="btn-primary">Explore Our Menu</a>
+      <a href="https://wa.me/856488484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank" class="btn-secondary">Order on WhatsApp</a>
+    </div>
+
+    <div class="mt-16 flex justify-center gap-8 text-amber-200 text-sm">
+      <div class="text-center">
+        <div class="font-dancing text-3xl" style="color:#C8860A;">500+</div>
+        <div>Happy Customers</div>
+      </div>
+      <div class="w-px" style="background:rgba(200,134,10,0.4);"></div>
+      <div class="text-center">
+        <div class="font-dancing text-3xl" style="color:#C8860A;">5★</div>
+        <div>Avg. Rating</div>
+      </div>
+      <div class="w-px" style="background:rgba(200,134,10,0.4);"></div>
+      <div class="text-center">
+        <div class="font-dancing text-3xl" style="color:#C8860A;">100%</div>
+        <div>Homemade</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-300 flex flex-col items-center gap-1">
+    <span class="text-xs uppercase tracking-widest" style="opacity:0.8;">Scroll</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-6" style="background:#FDF6EC;">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-dancing text-2xl mb-3" style="color:#C8860A;">Our Story</p>
+        <h2 class="font-playfair text-5xl font-bold mb-6" style="color:#2C1A0E;">Born from a Love of <em>Real</em> Food</h2>
+        <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+          D Café was born out of a simple dream — to create a warm, welcoming space in the heart of Bangalore where every cup of coffee feels like a warm hug and every bite of cake tells a story. We started with a tiny kitchen, a big oven, and an even bigger passion for authentic, homemade flavors that remind you of home.
+        </p>
+        <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+          Our recipes are crafted the old-fashioned way — no shortcuts, no artificial mixes, just fresh ingredients, handpicked with care and baked fresh every single day. From our fudgy double-chocolate brownies to our golden-crusted pastries, everything you taste at D Café is made with soul. We believe a good café is not just about great food — it is about creating memories.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <div class="about-highlight p-4 text-center">
+            <div class="font-playfair text-3xl font-bold mb-1" style="color:#C8860A;">100%</div>
+            <div class="text-sm text-gray-500 font-semibold">Homemade</div>
+          </div>
+          <div class="about-highlight p-4 text-center">
+            <div class="font-playfair text-3xl font-bold mb-1" style="color:#C8860A;">Fresh</div>
+            <div class="text-sm text-gray-500 font-semibold">Daily Bakes</div>
+          </div>
+          <div class="about-highlight p-4 text-center">
+            <div class="font-playfair text-3xl font-bold mb-1" style="color:#C8860A;">❤️</div>
+            <div class="text-sm text-gray-500 font-semibold">Made with Love</div>
+          </div>
+        </div>
+
+        <a href="#menu" class="btn-primary" style="color:white;text-decoration:none;">See Our Treats</a>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden shadow-2xl" style="background:linear-gradient(135deg,#5C3D2E,#C8860A); height:500px; display:flex; align-items:center; justify-content:center;">
+          <div class="text-center text-white px-8">
+            <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1773989102091.jpg"
+                 alt="D Café" class="w-40 h-40 rounded-full object-cover mx-auto mb-6 border-4 border-amber-300 shadow-2xl">
+            <p class="font-dancing text-3xl text-amber-300 mb-3">D Café</p>
+            <p class="text-amber-100 text-base leading-relaxed">Crafting happiness one cup, one cake, one cookie at a time — right here in beautiful Bangalore.</p>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 rounded-2xl flex items-center justify-center shadow-xl" style="background:#C8860A;">
+          <div class="text-center text-white">
+            <div class="font-playfair text-2xl font-bold">9AM</div>
+            <div class="text-xs">to 9PM</div>
+            <div class="text-xs">Daily</div>
+          </div>
+        </div>
+        <div class="absolute -top-6 -right-6 w-28 h-28 rounded-full flex items-center justify-center shadow-xl text-4xl" style="background:#FDF6EC; border:3px solid #C8860A;">
+          ☕
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-24 px-6" style="background:linear-gradient(180deg,#F0DFC8 0%,#FDF6
