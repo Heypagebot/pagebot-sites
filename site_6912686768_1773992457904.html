@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior:smooth;">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Brownie Café — Kasaragod</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#fdf8f3;color:#2c1a0e;overflow-x:hidden;}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
+
+:root{
+  --brown-dark:#3d1f0d;
+  --brown-mid:#6b3a2a;
+  --brown-warm:#a0522d;
+  --caramel:#c8813a;
+  --cream:#fdf8f3;
+  --latte:#f5e6d3;
+  --mocha:#8b4513;
+  --espresso:#2c1a0e;
+}
+
+@keyframes float1{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-30px) rotate(5deg);}}
+@keyframes float2{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-20px) rotate(-4deg);}}
+@keyframes float3{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-25px) rotate(3deg);}}
+@keyframes pulse-wa{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}}
+@keyframes scroll-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+
+.float1{animation:float1 7s ease-in-out infinite;}
+.float2{animation:float2 9s ease-in-out infinite;}
+.float3{animation:float3 6s ease-in-out infinite;}
+.wa-pulse{animation:pulse-wa 2.2s infinite;}
+.scroll-bounce{animation:scroll-bounce 1.8s ease-in-out infinite;}
+
+.hero-bg{background:linear-gradient(135deg,#3d1f0d 0%,#6b3a2a 30%,#a0522d 60%,#c8813a 100%);}
+.shimmer-text{background:linear-gradient(90deg,#c8813a,#f5d08a,#c8813a,#e8a855,#c8813a);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;}
+.card-hover{transition:transform 0.3s ease,box-shadow 0.3s ease;}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(61,31,13,0.15);}
+.btn-primary{background:linear-gradient(135deg,#c8813a,#a0522d);color:#fff;font-weight:600;padding:14px 32px;border-radius:50px;display:inline-block;transition:all 0.3s ease;border:none;cursor:pointer;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(161,82,45,0.45);}
+.btn-outline{border:2px solid #fff;color:#fff;font-weight:600;padding:12px 30px;border-radius:50px;display:inline-block;transition:all 0.3s ease;background:rgba(255,255,255,0.1);}
+.btn-outline:hover{background:#fff;color:#3d1f0d;transform:translateY(-2px);}
+.section-tag{font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c8813a;}
+.menu-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(61,31,13,0.08);}
+.menu-badge{background:linear-gradient(135deg,#c8813a,#a0522d);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;}
+.testimonial-card{background:#fff;border-radius:24px;padding:32px;box-shadow:0 4px 30px rgba(61,31,13,0.08);}
+.faq-item{border-bottom:1px solid #f0e0cc;}
+.nav-solid{background:rgba(253,248,243,0.95);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(61,31,13,0.1);}
+.star{color:#f5a623;}
+input,textarea{outline:none;transition:border-color 0.3s;}
+input:focus,textarea:focus{border-color:#c8813a !important;}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="#home">
+      <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1773992303780.jpg" alt="logo" style="height:44px;width:auto;object-fit:contain;" crossorigin="anonymous" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-weight:700;font-size:1.2rem;color:#3d1f0d;">Brownie Café</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8" id="nav-links">
+      <a href="#about" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">About</a>
+      <a href="#menu" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">Menu</a>
+      <a href="#gallery" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">Gallery</a>
+      <a href="#testimonials" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">Reviews</a>
+      <a href="#faq" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">FAQ</a>
+      <a href="#contact" class="font-medium hover:text-caramel transition-colors" style="color:#3d1f0d;">Contact</a>
+    </div>
+    <a href="https://wa.me/857588484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank" class="hidden md:block btn-primary text-sm py-3 px-6">
+      Order on WhatsApp
+    </a>
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" onclick="toggleMenu()">
+      <span class="block w-6 h-0.5 bg-espresso transition-all" style="background:#3d1f0d;"></span>
+      <span class="block w-6 h-0.5 bg-espresso transition-all" style="background:#3d1f0d;"></span>
+      <span class="block w-6 h-0.5 bg-espresso transition-all" style="background:#3d1f0d;"></span>
+    </button>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white px-6 py-6 shadow-xl mt-2 rounded-2xl mx-4">
+    <div class="flex flex-col gap-4">
+      <a href="#about" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">About</a>
+      <a href="#menu" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">Menu</a>
+      <a href="#gallery" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">Gallery</a>
+      <a href="#testimonials" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">Reviews</a>
+      <a href="#faq" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">FAQ</a>
+      <a href="#contact" onclick="toggleMenu()" class="font-medium text-espresso hover:text-caramel" style="color:#3d1f0d;">Contact</a>
+      <a href="https://wa.me/857588484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank" class="btn-primary text-center text-sm">Order on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero-bg relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Decorative Blobs -->
+  <div class="float1 absolute top-16 left-8 w-72 h-72 rounded-full opacity-20" style="background:radial-gradient(circle,#f5d08a,transparent 70%);"></div>
+  <div class="float2 absolute bottom-20 right-12 w-96 h-96 rounded-full opacity-25" style="background:radial-gradient(circle,#c8813a,transparent 70%);"></div>
+  <div class="float3 absolute top-40 right-24 w-48 h-48 rounded-full opacity-15" style="background:radial-gradient(circle,#fff,transparent 70%);"></div>
+  <!-- SVG Decorative -->
+  <svg class="absolute top-0 right-0 opacity-20 w-96" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="100" r="200" fill="rgba(255,255,255,0.12)"/>
+    <circle cx="350" cy="80" r="120" fill="rgba(255,255,255,0.08)"/>
+  </svg>
+  <svg class="absolute bottom-0 left-0 opacity-20 w-80" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="250" rx="200" ry="150" fill="rgba(0,0,0,0.2)"/>
+  </svg>
+  <!-- Coffee steam SVGs -->
+  <svg class="absolute right-16 top-32 opacity-25 hidden lg:block" width="60" height="100" viewBox="0 0 60 100">
+    <path d="M10 80 Q20 60 10 40 Q0 20 15 5" stroke="#f5d08a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M30 80 Q40 60 30 40 Q20 20 35 5" stroke="#f5d08a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M50 80 Q60 60 50 40 Q40 20 55 5" stroke="#f5d08a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+    <!-- Logo in Hero -->
+    <div class="mb-8 flex justify-center">
+      <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1773992303780.jpg" alt="Brownie Café Logo" style="height:80px;width:auto;object-fit:contain;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,0.35);" crossorigin="anonymous" onerror="this.onerror=null;this.style.display='none';">
+    </div>
+    <div class="section-tag text-yellow-300 mb-4">☕ Kasaragod's Favourite Café</div>
+    <h1 class="serif font-black leading-none mb-6" style="font-size:clamp(3rem,9vw,8rem);">
+      Life Is <span class="shimmer-text">Sweeter</span><br/>With Brownies
+    </h1>
+    <p class="text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 opacity-90 leading-relaxed">
+      Handcrafted brownies, artisan coffee, fresh pastries, and homemade cookies baked with love every single day. Come in and let the aroma do the talking — open 9 AM to 9 PM.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#menu" class="btn-primary text-base">Explore Our Menu</a>
+      <a href="https://wa.me/857588484?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank" class="btn-outline text-base">Order Now on WhatsApp</a>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="scroll-bounce mt-16 flex flex-col items-center gap-2 opacity-60">
+      <span class="text-xs tracking-widest uppercase">Scroll to explore</span>
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 15l7 7 7-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="section-tag mb-3">Our Story</div>
+        <h2 class="serif text-4xl md:text-5xl font-bold mb-6 leading-tight" style="color:#3d1f0d;">Born From A Passion For Perfect Bakes</h2>
+        <p class="text-base leading-relaxed mb-5" style="color:#5a3825;">Brownie Café was born in the heart of Kasaragod when a passionate home baker turned her grandmother's secret brownie recipe into a full-fledged café experience. Every recipe at Brownie Café carries the warmth of a home kitchen, crafted with only the finest ingredients sourced locally and with love. We believe that good food is more than just taste — it's the memory it creates and the smiles it brings to every table.</p>
+        <p class="text-base leading-relaxed mb-8" style="color:#5a3825;">From the very first batch of brownies that sold out within hours, we've grown into a beloved space where families gather, friends reconnect, and every bite feels like a warm hug. Our team of dedicated bakers rises early every morning to ensure everything is fresh, fragrant, and made from scratch — because that's the only way we know how to do it.</p>
+        <div class="flex flex-wrap gap-8 mb-8">
+          <div>
+            <div class="serif text-4xl font-black" style="color:#c8813a;">500+</div>
+            <div class="text-sm font-medium" style="color:#8b6355;">Happy Customers</div>
+          </div>
+          <div>
+            <div class="serif text-4xl font-black" style="color:#c8813a;">12+</div>
+            <div class="text-sm font-medium" style="color:#8b6355;">Signature Recipes</div>
+          </div>
+          <div>
+            <div class="serif text-4xl font-black" style="color:#c8813a;">9–9</div>
+            <div class="text-sm font-medium" style="color:#8b6355;">Open Daily</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary">Visit Us Today</a>
+      </div>
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden shadow-2xl" style="background:linear-gradient(135deg,#f5e6d3,#e8c9a0);padding:40px;min-height:420px;display:flex;align-items:center;justify-content:center;">
+          <div class="text-center">
+            <div style="font-size:100px;line-height:1;">🍫</div>
+            <div class="serif text-2xl font-bold mt-4" style="color:#3d1f0d;">Handcrafted With Love</div>
+            <div class="mt-2 text-sm" style="color:#8b4513;">Every single day, since day one.</div>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-3">
+          <div style="font-size:36px;">⭐</div>
+          <div>
+            <div class="font-bold serif" style="color:#3d1f0d;font-size:1.4rem;">4.9/5</div>
+            <div class="text-xs" style="color:#8b6355;">Customer Rating</div>
+          </div>
+        </div>
+        <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-5">
+          <div style="font-size:28px;">☕</div>
+          <div class="text-xs font-semibold mt-1" style="color:#3d1f0d;">Fresh Brewed<br/>Daily</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-24 px-6" style="background:#fdf8f3;">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="section-tag mb-3">What We Serve</div>
+      <h2 class="serif text-4xl md:text-5xl font-bold mb-4" style="color:#3d1f0d;">Our Delicious Menu</h2>
+      <p class="max-w-xl mx-auto text-base" style="color:#5a3825;">From rich espresso blends to fudgy brownies and buttery pastries — every item is made fresh daily and designed to delight your senses.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Coffee -->
+      <div class="menu-card card-hover">
+        <div style="background:linear-gradient(135deg,#3d1f0d,#6b3a2a);padding:40px 20px;text-align:center;">
+          <div style="font-size:64px;line-height:1;">☕</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="menu-badge">Bestseller</span>
+            <span class="font-bold serif" style="color:#c8813a;font-size:1.1rem;">₹80+</span>
+          </div>
+          <h3 class="serif text-xl font-bold mb-2" style="color:#3d1f0d;">Artisan Coffee</h3>
+          <p class="text-sm leading-relaxed" style="color:#7a5240;">Our coffee is sourced from premium Arabica and Robusta blends, crafted by skilled baristas. Choose from creamy lattes, bold espressos, cold brews, and our signature café mocha — every cup is a masterpiece that warms the soul.</p>
+          <a href="https://wa.me/857588484?text=Hi!%20I'd%20like%20to%20order%20Coffee" target="_blank" class="mt-4 block text-center btn-primary text-sm py-2.5">Order Now</a>
+        </div>
+      </div>
+      <!-- Pastries -->
+      <div class="menu-card card-hover">
+        <div style="background:linear-gradient(135deg,#a0522d,#c8813a);padding:40px 20px;text-align:center;">
+          <div style="font-size:64px;line-height:1;">🥐</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="menu-badge">Fresh Daily</span>
+            <span class="font-bold serif" style="color:#c8813a;font-size:1.1rem;">₹60+</span>
+          </div>
+          <h3 class="serif text-xl font-bold mb-2" style="color:#3d1f0d;">Buttery Pastries</h3>
+          <p class="text-sm leading-relaxed" style="color:#7a5240;">Our pastries are baked fresh every morning in-house, boasting flaky, golden layers and rich fillings that melt in your mouth. From classic croissants and cream-filled éclairs to seasonal tarts — each pastry is a little celebration of flavour and craft.</p>
+          <a href="https://wa.me/857588484?text=Hi!%20I'd%20like%20to%20order%20Pastries" target="_blank" class="mt-4 block text-center btn-primary text-sm py-2.5">Order Now</a>
+        </div>
+      </div>
+      <!-- Brownies -->
+      <div class="menu-card card-hover" style="border:2px solid #c8813a;">
+        <div style="background:linear-gradient(135deg,#2c1a0e,#4a2010);padding:40px 20px;text-align:center;position:relative;">
+          <div style="position:absolute;top:10px;right:10px;background:#c8813a;color:#fff;font-size:0.65rem;font-weight:700;padding:3px 8px;border-radius:10px;letter-spacing:0.1em;">SIGNATURE</div>
+          <div style="font-size:64px;line-height:1;">🍫</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="menu-badge">Our Specialty</span>
+            <span class="font-bold serif" style="color:#c8813a;font-size:1.1rem;">₹70+</span>
+          </div>
+          <h3 class="serif text-xl font-bold mb-2" style="color:#3d1f0d;">Signature Brownies</h3>
+          <p class="text-sm leading-relaxed" style="color:#7a5240;">The original, the legendary, the reason we opened our doors — our brownies are dense, fudgy, and loaded with premium Belgian chocolate. Try classic chocolate, walnut, caramel swirl, or our chilli-chocolate for the adventurous soul.</p>
+          <a href="https://wa.me/857588484?text=Hi!%20I'd%20like%20to%20order%20Brownies" target="_blank" class="mt-4 block text-center btn-primary text-sm py-2.5">Order Now</a>
+        </div>
+      </div>
+      <!-- Cookies -->
+      <div class="menu-card card-hover">
+        <div style="background:linear-gradient(135deg,#8b4513,#a0522d);padding:40px 20px;text-align:center;">
+          <div style="font-size:64px;line-height:1;">🍪</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="menu-badge">Homemade</span>
+            <span class="font-bold serif" style="color:#c8813a;font-size:1.1rem;">₹40+</span>
+          </div>
+          <h3 class="serif text-xl font-bold mb-2" style="color:#3d1f0d;">Homemade Cookies</h3>
+          <p class="text-sm leading-relaxed" style="color:#7a5240;">Baked fresh using grandma's recipe and zero preservatives, our cookies are crispy on the outside, chewy on the inside, and packed with chocolate chips, nuts, or dried fruits. Perfect as a snack, a gift, or paired with your morning coffee.</p>
+          <a href="https://wa.me/857588484?text=Hi!%20I'd%20like%20to%20order%20Cookies" target="_blank" class="mt-4 block text-center btn-primary text-sm py-2.5">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <!-- Special banner -->
+    <div class="mt-12 rounded-3xl p-8 md:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6" style="background:linear-gradient(135deg,#3d1f0d,#6b3a2a,#c8813a);">
+      <div>
+        <div class="text-yellow-300 text-sm font-semibold tracking-widest uppercase mb-2">🎁 Special Offer</div>
+        <h3 class="serif text-2xl md:text-3xl font-bold">Combo Deals & Bulk Orders Available!</h3>
+        <p class="mt-2 opacity-85 text-sm">Planning a party, event, or corporate gifting? We do custom brownie boxes and cookie hampers — just ask!</p>
+      </div>
+      <a href="https://wa.me/857588484?text=Hi!%20I'm%20interested%20in%20combo%20deals%20or%20bulk%20orders" target="_blank" class="btn-outline whitespace-nowrap flex-shrink-0">Chat With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="section-tag mb-3">Feast Your Eyes</div>
+      <h2 class="serif text-4xl md:text-5xl font-bold mb-4" style="color:#3d1f0d;">A Peek Inside Our Café</h2>
+      <p class="max-w-xl mx-auto text-base" style="color:#5a3825;">Every corner of Brownie Café is designed for comfort, warmth, and of course — great food. Take a look at what awaits you.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Gallery items with emoji-art placeholders -->
+      <div class="rounded-2xl overflow-hidden card-hover col-span-2 md:col-span-1" style="background:linear-gradient(135deg,#2c1a0e,#6b3a2a);min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+        <div style="font-size:72px;">🍫</div>
+        <div class="text-white font-semibold serif text-lg">Fudgy Brownies</div>
+        <div class="text-white text-xs opacity-60">Fresh from the oven</div>
+      </div>
+      <div class="rounded-2xl overflow-hidden card-hover" style="background:linear-gradient(135deg,#c8813a,#f5d08a);min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+        <div style="font-size:72px;">☕</div>
+        <div class="font-semibold serif text-lg" style="color:#3d1f0d;">Coffee Art</div>
+        <div class="text-xs opacity-60" style="color:#5a3825;">Brewed daily</div>
+      </div>
+      <div class="rounded-2xl overflow-hidden card-hover" style="background:linear-gradient(135deg,#a0522d,#c8813a);min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+        <div style="font-size:72px;">🥐</div>
+        <div class="text-white font-semibold serif text-lg">Pastry Corner</div>
+        <div class="text-white text-xs opacity-60">Baked this morning</div>
+      </div>
+      <div class="rounded-2xl overflow-hidden card-hover" style="background:linear-gradient(135deg,#f5e6d3,#e8c9a0);min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+        <div style="font-size:72px;">🍪</div>
+        <div class="font-semibold serif text-lg" style="color:#3d1f0d;">Cookie Jar</div>
+        <div
