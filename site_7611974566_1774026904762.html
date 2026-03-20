@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Peters Heating & Cooling | Mississauga HVAC Experts</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0f1e;
+    color: #e2e8f0;
+    overflow-x: hidden;
+  }
+
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  .glass {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .glass-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+  }
+
+  .glow-blue { box-shadow: 0 0 40px rgba(56,189,248,0.15); }
+  .glow-orange { box-shadow: 0 0 40px rgba(251,146,60,0.15); }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #38bdf8, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-bg {
+    background: radial-gradient(ellipse at 20% 50%, rgba(56,189,248,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(251,146,60,0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 60% 80%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0f1e 0%, #0d1526 50%, #0a0f1e 100%);
+  }
+
+  @keyframes floatBlob1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -40px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+
+  @keyframes floatBlob2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.08); }
+  }
+
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .blob1 { animation: floatBlob1 8s ease-in-out infinite; }
+  .blob2 { animation: floatBlob2 10s ease-in-out infinite; }
+  .wa-pulse { animation: pulse-wa 2s infinite; }
+  .scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+  .nav-solid {
+    background: rgba(10,15,30,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #0a0f1e;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(56,189,248,0.4);
+  }
+
+  .btn-secondary {
+    border: 1.5px solid rgba(56,189,248,0.5);
+    color: #38bdf8;
+    font-weight: 600;
+    padding: 13px 32px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    backdrop-filter: blur(8px);
+  }
+  .btn-secondary:hover {
+    background: rgba(56,189,248,0.1);
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(56,189,248,0.15);
+    border-color: rgba(56,189,248,0.3);
+  }
+  .service-card { transition: all 0.4s ease; }
+
+  .stat-divider {
+    background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.4), transparent);
+    width: 1px;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(251,146,60,0.3);
+    transform: translateY(-4px);
+  }
+  .testimonial-card { transition: all 0.3s ease; }
+
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .faq-answer { display: none; }
+  .faq-answer.open { display: block; }
+
+  .contact-input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+    width: 100%;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .contact-input:focus { border-color: rgba(56,189,248,0.5); }
+  .contact-input::placeholder { color: rgba(255,255,255,0.3); }
+
+  .mobile-menu { display: none; }
+  .mobile-menu.open { display: block; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0f1e; }
+  ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.4); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+
+    <!-- Logo -->
+    <div class="flex flex-col leading-none">
+      <span class="font-display font-900 text-xl tracking-tight" style="color:#38bdf8; font-size:1.4rem;">PETERS</span>
+      <span class="text-xs tracking-[0.25em] uppercase text-slate-400 font-light" style="letter-spacing:0.2em;">Heating & Cooling</span>
+    </div>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about" class="text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide">About</a>
+      <a href="#services" class="text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide">Services</a>
+      <a href="#testimonials" class="text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide">Reviews</a>
+      <a href="#faq" class="text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide">FAQ</a>
+      <a href="#contact" class="text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide">Contact</a>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="https://wa.me/15483334672?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-green-500/30">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+      <span class="block w-6 h-0.5 bg-slate-300 transition-all"></span>
+      <span class="block w-6 h-0.5 bg-slate-300 transition-all"></span>
+      <span class="block w-6 h-0.5 bg-slate-300 transition-all"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu md:hidden px-6 pb-6 pt-2">
+    <div class="glass rounded-2xl p-6 flex flex-col gap-4">
+      <a href="#about" class="text-slate-300 hover:text-white font-medium">About</a>
+      <a href="#services" class="text-slate-300 hover:text-white font-medium">Services</a>
+      <a href="#testimonials" class="text-slate-300 hover:text-white font-medium">Reviews</a>
+      <a href="#faq" class="text-slate-300 hover:text-white font-medium">FAQ</a>
+      <a href="#contact" class="text-slate-300 hover:text-white font-medium">Contact</a>
+      <a href="https://wa.me/15483334672?text=Hi!%20I%20found%20you%20on%20Pagebot" target="_blank"
+         class="flex items-center gap-2 bg-green-500 text-white text-sm font-semibold px-5 py-3 rounded-full w-fit mt-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+
+  <!-- Decorative blobs -->
+  <div class="blob1 absolute top-1/4 left-10 w-80 h-80 rounded-full opacity-20"
+       style="background: radial-gradient(circle, rgba(56,189,248,0.4), transparent 70%);"></div>
+  <div class="blob2 absolute bottom-1/4 right-10 w-96 h-96 rounded-full opacity-20"
+       style="background: radial-gradient(circle, rgba(251,146,60,0.35), transparent 70%);"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10"
+       style="background: radial-gradient(circle, rgba(99,102,241,0.3), transparent 70%);"></div>
+
+  <!-- Decorative SVG grid lines -->
+  <svg class="absolute inset-0 w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(56,189,248,0.15)" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+
+  <!-- Decorative SVG accent circles -->
+  <svg class="absolute top-20 right-20 opacity-25 hidden lg:block" width="200" height="200" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="90" fill="none" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="8 6"/>
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#fb923c" stroke-width="0.5" stroke-dasharray="4 8"/>
+    <circle cx="100" cy="100" r="30" fill="none" stroke="#38bdf8" stroke-width="0.5"/>
+  </svg>
+
+  <svg class="absolute bottom-20 left-20 opacity-20 hidden lg:block" width="160" height="160" viewBox="0 0 160 160">
+    <polygon points="80,10 150,150 10,150" fill="none" stroke="#fb923c" stroke-width="0.8"/>
+    <polygon points="80,35 125,130 35,130" fill="none" stroke="#38bdf8" stroke-width="0.5"/>
+  </svg>
+
+  <div class="relative z-10 text-center max-w-5xl mx-auto px-6">
+
+    <!-- Brand mark -->
+    <div class="flex flex-col items-center mb-8">
+      <div class="inline-flex items-center gap-3 glass px-6 py-3 rounded-full mb-6">
+        <div class="w-2 h-2 rounded-full bg-green-400" style="box-shadow: 0 0 8px rgba(74,222,128,0.8);"></div>
+        <span class="text-sm text-slate-300 font-medium tracking-widest uppercase">Mississauga's Trusted HVAC Experts</span>
+      </div>
+      <div class="font-display font-900 leading-none mb-2" style="font-size: clamp(2.5rem, 10vw, 7rem); color:#38bdf8; letter-spacing:-0.02em;">PETERS</div>
+      <div class="tracking-[0.4em] uppercase text-slate-400 text-sm md:text-base font-light" style="letter-spacing:0.35em;">Heating & Cooling</div>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="font-display font-700 leading-tight mb-6 text-white" style="font-size: clamp(1.8rem, 5vw, 4rem);">
+      Comfort You Can Count On,<br/>
+      <span class="gradient-text">All Year Round.</span>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+      Professional heating, cooling, and HVAC services for Mississauga homeowners. Reliable, fast, and always done right the first time.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <a href="#contact" class="btn-primary text-base">Get a Free Quote</a>
+      <a href="#services" class="btn-secondary text-base">Explore Services</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex items-center justify-center gap-0 glass rounded-2xl p-6 max-w-lg mx-auto">
+      <div class="flex-1 text-center">
+        <div class="font-display text-3xl font-700 gradient-text">500+</div>
+        <div class="text-slate-400 text-xs mt-1 tracking-wide">Happy Clients</div>
+      </div>
+      <div class="stat-divider h-12 mx-2"></div>
+      <div class="flex-1 text-center">
+        <div class="font-display text-3xl font-700 gradient-text">10+</div>
+        <div class="text-slate-400 text-xs mt-1 tracking-wide">Years Experience</div>
+      </div>
+      <div class="stat-divider h-12 mx-2"></div>
+      <div class="flex-1 text-center">
+        <div class="font-display text-3xl font-700 gradient-text">100%</div>
+        <div class="text-slate-400 text-xs mt-1 tracking-wide">Satisfaction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-bounce">
+    <span class="text-xs text-slate-500 tracking-widest uppercase">Scroll</span>
+    <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0" style="background: linear-gradient(135deg, #0d1526 0%, #0a0f1e 100%);"></div>
+  <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
+       style="background: radial-gradient(circle, rgba(251,146,60,0.4), transparent 70%); transform: translate(30%, -30%);"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Story -->
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12 bg-sky-400"></div>
+          <span class="text-sky-400 text-sm font-semibold tracking-widest uppercase">Our Story</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-700 text-white mb-6 leading-tight">
+          A Decade of Keeping<br/><span class="gradient-text">Mississauga Warm.</span>
+        </h2>
+        <p class="text-slate-400 text-base leading-relaxed mb-5">
+          Peters Heating & Cooling was founded with one simple mission: to provide Mississauga homeowners with honest, expert HVAC service they can truly rely on. Over the past decade, we've grown from a one-truck operation to a trusted name across the city, built entirely on word-of-mouth and satisfied customers. We take pride in treating every home like our own and every client like a neighbor.
+        </p>
+        <p class="text-slate-400 text-base leading-relaxed mb-8">
+          Our team is fully licensed, insured, and trained on the latest heating and cooling technologies. Whether it's a freezing January night or a sweltering August afternoon, we show up on time and get the job done right. We believe comfort shouldn't be a luxury — it should be a guarantee for every family in Mississauga.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <div class="glass-card px-5 py-3 flex items-center gap-3">
+            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-sm text-slate-300 font-medium">Fully Licensed & Insured</span>
+          </div>
+          <div class="glass-card px-5 py-3 flex items-center gap-3">
+            <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-sm text-slate-300 font-medium">Mon–Fri, 9AM–5PM</span>
+          </div>
+          <div class="glass-card px-5 py-3 flex items-center gap-3">
+            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+            <span class="text-sm text-slate-300 font-medium">Serving Mississauga</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Values Cards -->
+      <div class="grid grid-cols-2 gap-5">
+        <div class="glass-card p-6 glow-blue">
+          <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background: rgba(56,189,248,0.15);">
+            <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Fast Response</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">We respond quickly and arrive on schedule, because your comfort can't wait.</p>
+        </div>
+
+        <div class="glass-card p-6 glow-orange mt-8">
+          <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background: rgba(251,146,60,0.15);">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Quality Guaranteed</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Every job meets the highest standards. We don't leave until the work is perfect.</p>
+        </div>
+
+        <div class
