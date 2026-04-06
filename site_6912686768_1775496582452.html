@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Puttu Project | Ultra-Luxury Kerala Fusion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark: #0a0a0a;
+            --cream: #f9f7f2;
+            --gray: #1a1a1a;
+            --accent: #c5a028;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--dark);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-top: 20px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 220px;
+            gap: 20px;
+        }
+
+        .bento-item {
+            background: var(--gray);
+            border-radius: 30px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: transform 0.4s ease, border 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        /* Span variations */
+        .span-2-w { grid-column: span 2; }
+        .span-2-h { grid-row: span 2; }
+        .span-4-w { grid-column: span 4; }
+
+        /* Content Styles */
+        .bento-item h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cream);
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+            color: var(--accent);
+        }
+
+        /* Specific Blocks */
+        .hero-block {
+            background: linear-gradient(45deg, #1a1a1a, #000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-block h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        .story-block {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        .story-block h2, .story-block p {
+            color: var(--dark);
+        }
+
+        .contact-btn {
+            background: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--cream);
+        }
+
+        .vibe-tag {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .span-4-w { grid-column: span 2; }
+        }
+
+        @media (max-width: 600px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+            }
+            .span-2-w, .span-2-h, .span-4-w { grid-column: span 1; grid-row: span 1; }
+            header h1 { font-size: 2.5rem; }
+        }
+
+        .sulaimani-box {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544787210-2827448b303c?auto=format&fit=crop&q=80&w=800');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <span class="label">Kasaragod's Finest</span>
+            <h1>The Puttu Project</h1>
+            <p>Fusion soul. Kerala core. Unlimited stories.</p>
+        </header>
+
+        <div class="bento-grid">
+            <!-- Story Block -->
+            <div class="bento-item span-2-w span-2-h hero-block">
+                <span class="label">Our Philosophy</span>
+                <h2>Varieties of Puttu with Sulaimani & Vibe</h2>
+                <p>We are redefining the classic Kerala breakfast. A fusion journey that respects the traditional core while embracing modern culinary artistry.</p>
+                <a href="https://wa.me/918547500686" class="contact-btn">Reserve Your Table</a>
+            </div>
+
+            <!-- Signature Item 1 -->
+            <div class="bento-item span-2-h">
+                <span class="label">Signature</span>
+                <h2>Beef Puttu with Chicken</h2>
+                <p>The ultimate meat-lovers fusion. Rich, spiced, and hearty.</p>
+                <div class="price">₹130</div>
+            </div>
+
+            <!-- Location & Hours -->
+            <div class="bento-item">
+                <span class="label">Location</span>
+                <h2>Kasaragod</h2>
+                <p>The heart of the vibe.</p>
+            </div>
+
+            <div class="bento-item">
+                <span class="label">Open Daily</span>
+                <h2>9 AM - 9 PM</h2>
+                <p>Breakfast to Dinner.</p>
+            </div>
+
+            <!-- Signature Item 2 -->
+            <div class="bento-item">
+                <span class="label">Classic</span>
+                <h2>Classic Puttu</h2>
+                <p>The soul of Kerala.</p>
+                <div class="price">₹150</div>
+            </div>
+
+            <!-- Sulaimani Vibe -->
+            <div class="bento-item span-2-w sulaimani-box">
+                <span class="label" style="color: white;">The Experience</span>
+                <h2 style="color: white;">A Cup of Sulaimani</h2>
+                <p style="color: white;">Every Puttu tells a story. Every sip completes it.</p>
+            </div>
+
+            <!-- Signature Item 3 -->
+            <div class="bento-item">
+                <span class="label">Indulgence</span>
+                <h2>Chocolate Puttu</h2>
+                <p>Melting cocoa layers.</p>
+                <div class="price">₹160</div>
+            </div>
+
+            <!-- Signature Item 4 -->
+            <div class="bento-item">
+                <span class="label">Modern</span>
+                <h2>Cheese Puttu</h2>
+                <p>Gooey, savory perfection.</p>
+                <div class="price">₹145</div>
+            </div>
+
+            <!-- Contact/WhatsApp -->
+            <div class="bento-item span-2-w story-block">
+                <span class="label">Connect</span>
+                <h2>Join the Story</h2>
+                <p>For bookings and inquiries, reach out to us directly.</p>
+                <p style="font-weight: 700; font-size: 1.5rem; margin-top: 10px;">+91 8547500686</p>
+            </div>
+
+            <!-- Footer Quote -->
+            <div class="bento-item span-4-w" style="text-align: center; background: transparent; border: none;">
+                <p style="font-style: italic; opacity: 0.6;">© 2024 The Puttu Project. Crafted for the connoisseurs of Kasaragod.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
