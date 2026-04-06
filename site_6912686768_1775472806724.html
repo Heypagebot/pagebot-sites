@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Puttu Cafe | Fusion Traditions in Kasaragod</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #FF4D00;
+            --dark: #121212;
+            --glass: rgba(18, 18, 18, 0.8);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: #FFFFFF;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .heading-font {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.4;
+        }
+        .ml-text { line-height: 1.8; }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            background: var(--glass);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1.5rem;
+        }
+        .bento-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #1A1A1A;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+        }
+        .bento-item:hover { transform: scale(1.02); }
+        .bento-1 { grid-column: span 2; grid-row: span 1; }
+        .bento-2 { grid-column: span 1; grid-row: span 1; }
+        .bento-3 { grid-column: span 1; grid-row: span 2; }
+        .bento-4 { grid-column: span 1; grid-row: span 1; }
+        .bento-5 { grid-column: span 2; grid-row: span 1; }
+
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .bento-1, .bento-2, .bento-3, .bento-4, .bento-5 { grid-column: span 2; height: 300px; }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(0deg, rgba(18,18,18,1) 0%, rgba(18,18,18,0.4) 100%);
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(255, 77, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        .bottom-bar {
+            backdrop-filter: blur(15px);
+            background: rgba(18, 18, 18, 0.9);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1775472777035.jpg" alt="Logo" class="h-10 w-10 rounded-full object-cover border border-white/20">
+                <span class="text-xl font-extrabold tracking-tighter">THE PUTTU CAFE</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium opacity-80">
+                <a href="#home" class="hover:text-[var(--primary)] transition">Home</a>
+                <a href="#about" class="hover:text-[var(--primary)] transition">Our Story</a>
+                <a href="#menu" class="hover:text-[var(--primary)] transition">Menu</a>
+                <a href="#contact" class="hover:text-[var(--primary)] transition">Find Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1626132646529-5003375a9541?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover scale-110 blur-[2px]" alt="Background">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <span class="inline-block px-4 py-1 rounded-full bg-white/10 backdrop-blur-md text-sm mb-6 border border-white/10 uppercase tracking-widest">Kasaragod's Finest Fusion</span>
+            <h1 class="text-5xl md:text-8xl font-extrabold mb-6 tracking-tight">Tradition meets <span class="text-[var(--primary)]">Fusion.</span></h1>
+            <p class="text-lg md:text-xl opacity-90 mb-10 ml-text font-light max-w-2xl mx-auto">
+                പുട്ടിന്റെ തനിമ ചോരാതെ, പുത്തൻ രുചികൾക്കൊപ്പം ഒരു സുലൈമാനിയും പിന്നെ കുറച്ച് വർത്തമാനങ്ങളും. 
+                Discover the soul of Kerala with a modern twist.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#menu" class="btn-primary px-8 py-4 rounded-full font-bold text-lg">Explore Menu</a>
+                <a href="tel:8547500686" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full font-bold text-lg backdrop-blur-md transition">Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-6">Keeping the core, <br><span class="text-[var(--primary)]">Changing the game.</span></h2>
+                <p class="text-gray-400 text-lg leading-relaxed mb-6 ml-text">
+                    At The Puttu Cafe, we believe food is a story told through steam. We've taken the classic Kerala breakfast—the humble Puttu—and reimagined it for the modern palate. Whether it's the spicy kick of beef or the indulgence of chocolate, every bite is a tribute to our roots and an exploration of the new.
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <h3 class="text-2xl font-bold text-[var(--primary)]">12 PM - 11:30 PM</h3>
+                        <p class="text-xs opacity-50 uppercase tracking-wider mt-1">Opening Hours</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <h3 class="text-2xl font-bold text-[var(--primary)]">Kasaragod</h3>
+                        <p class="text-xs opacity-50 uppercase tracking-wider mt-1">Location</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-[500px] rounded-3xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Cafe Vibe">
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Bento Box -->
+    <section id="menu" class="py-24 px-6 bg-[#0A0A0A]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-4xl font-bold">Our Signature Creations</h2>
+                    <p class="text-gray-500 mt-2">Handcrafted with love and steam.</p>
+                </div>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Beef/Chicken Fusion -->
+                <div class="bento-item bento-1 group">
+                    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition duration-500" alt="Beef Puttu">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold">Beef & Chicken Fusion</h3>
+                        <p class="text-sm opacity-80 mt-2">The ultimate meaty delight steamed to perfection.</p>
+                    </div>
+                </div>
+
+                <!-- Classic Puttu -->
+                <div class="bento-item bento-2 group">
+                    <img src="https://images.unsplash.com/photo-1605035015310-91124ad51091?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-500" alt="Classic Puttu">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 p-6 flex flex-col justify-end">
+                        <h3 class="text-xl font-bold">Classic White</h3>
+                        <p class="text-xs opacity-70 mt-1">Traditional rice puttu with grated coconut.</p>
+                    </div>
+                </div>
+
+                <!-- Chocolate Puttu -->
+                <div class="bento-item bento-3 group">
+                    <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition duration-500" alt="Chocolate Puttu">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 p-8 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold">Chocolate Puttu</h3>
+                        <p class="text-sm opacity-80 mt-2">A sweet twist for the dessert lovers.</p>
+                    </div>
+                </div>
+
+                <!-- Cheese Puttu -->
+                <div class="bento-item bento-4 group">
+                    <div class="absolute inset-0 bg-[var(--primary)]/10"></div>
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                        <h3 class="text-xl font-bold">Cheese Burst</h3>
+                        <p class="text-xs opacity-70 mt-1">Molten cheese layered within warm steam.</p>
+                    </div>
+                </div>
+
+                <!-- Sulaimani & Vibe -->
+                <div class="bento-item bento-5 group">
+                    <img src="https://images.unsplash.com/photo-1544787210-282744863051?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition duration-500" alt="Sulaimani">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 p-8 flex flex-col justify-end">
+                        <span class="text-[var(--primary)] font-bold text-xs tracking-widest mb-2">THE PERFECT PAIR</span>
+                        <h3 class="text-3xl font-bold">Sulaimani & Stories</h3>
+                        <p class="text-sm opacity-80 mt-2">Wash it down with our signature spiced Sulaimani and endless vibes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="py-24 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+            <div>
+                <img src="https://lirrjoolbuhwpgvdlntc.supabase.co/storage/v1/object/public/logos/logo_6912686768_1775472777035.jpg" alt="Logo" class="h-16 w-16 rounded-full mb-6">
+                <h2 class="text-2xl font-bold mb-4">The Puttu Cafe</h2>
+                <p class="text-gray-500 ml-text">Kasaragod's destination for fusion puttu and great conversations. Join us for a vibe like no other.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">Visit Us</h3>
+                <p class="text-gray-400 mb-2">Kasaragod, Kerala</p>
+                <p class="text-gray-400 mb-6">Open Daily: 12:00 PM - 11:30 PM</p>
+                <a href="https://wa.me/918547500686" class="text-[var(--primary)] font-bold hover:underline">Chat on WhatsApp</a>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">Menu</a></li>
+                    <li><a href="#" class="hover:text-white transition">Gallery</a></li>
+                    <li><a href="#" class="hover:text-white transition">Location</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 text-center text-sm text-gray-600">
+            © 2023 The Puttu Cafe. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden p-4 bottom-bar">
+        <div class="flex gap-4">
+            <a href="tel:8547500686" class="flex-1 bg-white text-black font-bold py-4 rounded-2xl text-center flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Call
+            </a>
+            <a href="https://wa.me/918547500686" class="flex-1 bg-[#25D366] text-white font-bold py-4 rounded-2xl text-center flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-14 8.38 8.38 0 0 1 3.8.9L21 3z"></path></svg>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Extra spacing for mobile bar -->
+    <div class="h-24 md:hidden"></div>
+
+</body>
+</html>
