@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Puttu Project | Fusion Kerala Cuisine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-text { color: #D4AF37; }
+        .gold-border { border-color: #D4AF37; }
+        .gold-bg { background-color: #D4AF37; }
+        .bento-tile {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .bento-tile:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-5px);
+        }
+        .glass-dock {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 2rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <header class="max-w-7xl mx-auto mb-10 flex justify-between items-center px-4">
+        <h1 class="text-3xl font-bold tracking-tight gold-text">THE PUTTU PROJECT</h1>
+        <div class="hidden md:block text-sm uppercase tracking-[0.2em] opacity-60">Kasaragod • 09:00 - 21:00</div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- Hero Tile -->
+        <div class="md:col-span-2 bento-tile p-8 md:p-12 flex flex-col justify-center min-h-[400px]">
+            <span class="gold-text font-semibold tracking-widest text-sm mb-4">ESTABLISHED IN KASARAGOD</span>
+            <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">Tradition, <br><span class="gold-text italic">Reimagined.</span></h2>
+            <p class="text-lg opacity-80 leading-relaxed max-w-md">
+                We take Kerala's classic breakfast and infuse it with modern soul. Every grain tells a story, every bite creates a vibe.
+            </p>
+        </div>
+
+        <!-- Menu Tile -->
+        <div class="bento-tile p-8">
+            <h3 class="text-2xl font-bold mb-6 gold-text">Signature Plates</h3>
+            <ul class="space-y-6">
+                <li class="flex justify-between items-center border-b border-white/5 pb-2">
+                    <div>
+                        <p class="font-semibold uppercase text-xs tracking-wider opacity-60">The Original</p>
+                        <p class="text-lg">Classic Puttu</p>
+                    </div>
+                    <span class="gold-text font-bold">₹150</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-white/5 pb-2">
+                    <div>
+                        <p class="font-semibold uppercase text-xs tracking-wider opacity-60">Fusion Masterpiece</p>
+                        <p class="text-lg">Beef & Chicken</p>
+                    </div>
+                    <span class="gold-text font-bold">₹130</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-white/5 pb-2">
+                    <div>
+                        <p class="font-semibold uppercase text-xs tracking-wider opacity-60">Indulgent</p>
+                        <p class="text-lg">Cheese Puttu</p>
+                    </div>
+                    <span class="gold-text font-bold">₹145</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Tile (Span Row 2) -->
+        <div class="md:row-span-2 bento-tile p-8 flex flex-col justify-between bg-gradient-to-br from-white/10 to-transparent">
+            <div>
+                <h3 class="text-2xl font-bold mb-8 gold-text">Visit Us</h3>
+                <div class="space-y-8">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest opacity-50 mb-2">Location</p>
+                        <p class="text-xl">Kasaragod, Kerala</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest opacity-50 mb-2">Operating Hours</p>
+                        <p class="text-xl italic">Daily: 9:00 AM — 9:00 PM</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest opacity-50 mb-2">The Experience</p>
+                        <p class="text-sm leading-relaxed opacity-70">Pairs perfectly with our signature Sulaimani and endless stories.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12">
+                <a href="https://wa.me/918547500686" class="gold-bg text-black font-bold py-4 px-6 rounded-2xl w-full inline-block text-center hover:scale-[1.02] transition-transform">
+                    Book a Table
+                </a>
+            </div>
+        </div>
+
+        <!-- Story Tile -->
+        <div class="bento-tile p-8 flex flex-col justify-center">
+            <h3 class="text-2xl font-bold mb-4 gold-text italic">The Vibe</h3>
+            <p class="text-sm opacity-70 leading-relaxed">
+                It's more than just food. It's about the steam rising from the cylinder, the aroma of fresh coconut, and the warmth of a perfect Sulaimani. 
+            </p>
+        </div>
+
+        <!-- Gallery Tile -->
+        <div class="md:col-span-2 bento-tile overflow-hidden relative group">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+            <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=1000&auto=format&fit=crop" alt="Puttu Fusion" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+            <div class="absolute bottom-8 left-8 z-20">
+                <h3 class="text-3xl font-bold italic">Chocolate Puttu</h3>
+                <p class="gold-text tracking-widest uppercase text-xs mt-2">Dessert Innovation • ₹160</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Floating Dock -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
+        <div class="glass-dock px-6 py-4 flex justify-around items-center shadow-2xl">
+            <a href="tel:8547500686" class="flex flex-col items-center gap-1 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span class="text-[10px] uppercase font-bold tracking-tighter opacity-60 group-hover:opacity-100">Call Now</span>
+            </a>
+            <div class="h-8 w-[1px] bg-white/10"></div>
+            <a href="https://wa.me/918547500686" class="flex flex-col items-center gap-1 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L22 2l-2.5 4.5Z"></path></svg>
+                <span class="text-[10px] uppercase font-bold tracking-tighter opacity-60 group-hover:opacity-100">WhatsApp</span>
+            </a>
+            <div class="h-8 w-[1px] bg-white/10"></div>
+            <a href="#" class="flex flex-col items-center gap-1 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span class="text-[10px] uppercase font-bold tracking-tighter opacity-60 group-hover:opacity-100">Menu</span>
+            </a>
+        </div>
+    </div>
+
+    <footer class="max-w-7xl mx-auto mt-20 mb-32 text-center opacity-40 text-xs tracking-widest">
+        &copy; 2024 THE PUTTU PROJECT • KASARAGOD • LUXURY FUSION DINING
+    </footer>
+
+</body>
+</html>
